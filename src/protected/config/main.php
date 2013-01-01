@@ -84,6 +84,19 @@ return array(
 				*/
 			),
 		),
+		'clientScript' => array(
+			'packages' => array(
+				'common' => array(
+					'baseUrl' => '',
+					'js' => array(
+						'js/lib/underscore-min.js',
+						'js/lib/backbone-min.js',
+						'js/lib/handlebars-1.0.rc.1.min.js',
+						'js/app.js',
+					),
+				),
+			),
+		),
 	),
 
 	// application-level parameters that can be accessed
