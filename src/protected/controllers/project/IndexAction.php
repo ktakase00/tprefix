@@ -7,17 +7,31 @@ class IndexAction extends CAction
 		$controller = $this->getController();
 		
 		$controller->registerPackage(array(
-				'js/models/m_project.js',
-				'js/collections/c_project.js',
-				'js/views/v_project_item.js',
-				'js/views/v_project_list.js',
-				'js/views/v_float_window.js',
+				'js/models/m_Project.js',
+				'js/collections/c_Project.js',
+				'js/views/project/v_ProjectItem.js',
+				'js/views/project/v_ProjectAddNew.js',
+				'js/views/project/v_ProjectList.js',
+				'js/views/common/v_FrameWindow.js',
+				'js/views/project/v_ProjectEditDialog.js',
+				'js/views/project/v_ProjectDeleteDialog.js',
+				'js/views/project/v_ProjectMenu.js',
 				'js/startup/s_project.js',
 			),
 			array(
-				'css/float_window.css',
+				'css/app/frame_window.css',
+				'css/app/project.css',
 		));
 		
-		$controller->render('index');
+		$partials = array(
+			'/common/_frame_window' => array(),
+			'_project_edit_dialog' => array(),
+			'_project_delete_dialog' => array(),
+			'_project_menu' => array(),
+		);
+		
+		$controller->render('index', array(
+			'partials' => $partials
+		));
 	}
 }

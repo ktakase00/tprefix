@@ -1,1 +1,1 @@
-<?php $this->renderPartial('/common/float_window'); ?>
+<?php $this->renderPartials($partials); ?>

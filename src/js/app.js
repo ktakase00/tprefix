@@ -5,6 +5,9 @@
 	app = {
 		models: {},
 		collections: {},
-		views: {},
+		views: {
+			common: {},
+			project: {},
+		},
 	};
 })();

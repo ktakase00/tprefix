@@ -7,6 +7,8 @@ class ProjectController extends Controller
 		return array(
 			'index' => 'application.controllers.project.IndexAction',
 			'list' => 'application.controllers.project.ListAction',
+			'save' => 'application.controllers.project.SaveAction',
+			'delete' => 'application.controllers.project.DeleteAction',
 		);
 	}
 }

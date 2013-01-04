@@ -58,4 +58,11 @@ class Controller extends CController
 		header('Content-type: application/json');
 		echo CJSON::encode($valueAry);
 	}
+	
+	public function renderPartials($partials)
+	{
+		foreach ($partials as $partial => $params) {
+			$this->renderPartial($partial, $params);
+		}
+	}
 }
