@@ -68,4 +68,55 @@ class Project extends CActiveRecord
 		$model->attributes = $params;
 		return $model;
 	}
+	
+	public function save($runValidation = true, $attributes = NULL)
+	{
+		$connection=Yii::app()->db;
+		$transaction=$connection->beginTransaction();
+		$isNew = $this->isNewRecord;
+		
+		$res = parent::save($runValidation, $attributes);
+		if (!$res) {
+			$transaction->rollback();
+			return false;
+		}
+		
+		if ($isNew) {
+			$pr = new ProjectRevision('save');
+			$pr->attributes = array(
+				'project_id' => $this->project_id,
+				'revision_id'=> 1,
+			);
+			$res = $pr->save();
+			if (!$res) {
+				$transaction->rollback();
+				return false;
+			}
+		}
+		$transaction->commit();
+		return true;
+	}
+	
+	public function delete()
+	{
+		$connection=Yii::app()->db;
+		$transaction=$connection->beginTransaction();
+		
+		ProjectRevision::model()->updateAll(array(
+				'delete_ts' => new CDbExpression('NOW()'),
+			),
+			'project_id = :project_id AND delete_ts IS NULL',
+			array(
+				$this->project_id,
+		));
+		
+		$res = parent::save();
+		if (!$res) {
+			$transaction->rollback();
+			return false;
+		}
+		
+		$transaction->commit();
+		return true;
+	}
 }

@@ -6,7 +6,7 @@ class DeleteAction extends CAction
 	{
 		$controller = $this->getController();
 		$model = Project::prepare($_POST, 'delete');
-		$res = $model->save();
+		$res = $model->delete();
 		
 		$res = array(
 			'res' => $res,
