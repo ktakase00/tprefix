@@ -68,4 +68,36 @@ class ProjectRevision extends CActiveRecord
 		$model->attributes = $params;
 		return $model;
 	}
+	
+	public function createNewRevision($projectId)
+	{
+		$this->attributes = array(
+			'project_id' => $projectId,
+			'revision_id'=> 1,
+		);
+		return $this->save();
+	}
+	
+	public static function findLatest($projectId)
+	{
+		$model = new ProjectRevision;
+		$tableName = $model->tableName();
+		$whereContent = <<<EOS
+			delete_ts IS NULL
+			AND project_id = :project_id
+			AND revision_id = (
+			  SELECT
+			    MAX(revision_id)
+			  FROM
+			    {$tableName}
+			  WHERE
+			    delete_ts IS NULL
+			    AND project_id = :sub_project_id
+			)
+EOS;
+		return self::model()->find($whereContent, array(
+			$projectId,
+			$projectId,
+		));
+	}
 }

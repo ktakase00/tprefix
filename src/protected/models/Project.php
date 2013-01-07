@@ -83,11 +83,7 @@ class Project extends CActiveRecord
 		
 		if ($isNew) {
 			$pr = new ProjectRevision('save');
-			$pr->attributes = array(
-				'project_id' => $this->project_id,
-				'revision_id'=> 1,
-			);
-			$res = $pr->save();
+			$res = $pr->createNewRevision($this->project_id);
 			if (!$res) {
 				$transaction->rollback();
 				return false;
