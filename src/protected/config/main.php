@@ -8,7 +8,6 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
-	'language' => 'ja',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -17,6 +16,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.controllers.RestController',
+		'ext.RESTFullYii.components.*',
 	),
 
 	'modules'=>array(
@@ -25,7 +26,7 @@ return array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'Enter Your Password Here',
-		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 		*/
@@ -38,38 +39,34 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+			/*
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
+			*/
+			'rules'=>require(dirname(__FILE__).'/../extensions/RESTFullYii/config/routes.php'),
 		),
-		*/
-		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
-		*/
 		// uncomment the following to use a MySQL database
+		/*
 		'db'=>array(
-			'connectionString' => 'pgsql:host=localhost;port=5432;dbname=tprefix',
-//			'emulatePrepare' => true,
-			'username' => 'pepsi',
-			'password' => 'nex',
+			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => '',
 			'charset' => 'utf8',
 		),
-		'session'=>array(
-			'class' => 'CDbHttpSession',
-			'sessionTableName' => 'project.t_session',
-			'connectionID' => 'db',
-		),
+		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-            'errorAction'=>'site/error',
-        ),
+			'errorAction'=>'site/error',
+		),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -83,19 +80,6 @@ return array(
 					'class'=>'CWebLogRoute',
 				),
 				*/
-			),
-		),
-		'clientScript' => array(
-			'packages' => array(
-				'common' => array(
-					'baseUrl' => '',
-					'js' => array(
-						'js/lib/underscore-min.js',
-						'js/lib/backbone-min.js',
-						'js/lib/handlebars-1.0.rc.1.min.js',
-						'js/app.js',
-					),
-				),
 			),
 		),
 	),

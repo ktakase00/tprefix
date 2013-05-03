@@ -1,0 +1,16 @@
+.DS_Store
+.htaccess
+.project
+.buildpath
+.settings
+.htpasswd
+.htaccess
+*~
+*.swp
+runtime
+assets
+tmp
+log
+.bundle
+vendor
+

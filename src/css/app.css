@@ -1,0 +1,24 @@
+.float-frame {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #666666;
+  position: absolute;
+  width: 200px;
+}
+
+.float-title {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #666666;
+  background-color: #ccccff;
+  margin: 1px 1px 0px 1px;
+  padding: 1px;
+}
+
+.float-content {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #666666;
+  margin: 1px;
+  padding: 1px;
+}

@@ -1,14 +1,32 @@
 <?php
 
-class ProjectController extends Controller
+class ProjectController extends RestController
 {
-	public function actions()
-	{
-		return array(
-			'index' => 'application.controllers.project.IndexAction',
-			'list' => 'application.controllers.project.ListAction',
-			'save' => 'application.controllers.project.SaveAction',
-			'delete' => 'application.controllers.project.DeleteAction',
-		);
+	public function doRestList() {
+		$res = [
+			[
+				'project_id' => 1,
+				'project_nm' => 'test1',
+			],
+			[
+				'project_id' => 2,
+				'project_nm' => 'test2',
+			],
+		];
+		$this->renderJson($res);
+	}
+	
+	public function doRestView($id) {
+		$res = [
+			[
+				'project_id' => 1,
+				'project_nm' => 'test1',
+			],
+			[
+				'project_id' => 2,
+				'project_nm' => 'test2',
+			],
+		];
+		$this->renderJson($res[$id-1]);
 	}
 }

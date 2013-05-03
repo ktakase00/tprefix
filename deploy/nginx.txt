@@ -1,0 +1,21 @@
+server {
+    server_name  example-takase-tprefix.uniquevision.jp;
+    listen 80;
+    root /var/www/app/example-takase/tprefix;
+
+    location / {
+        # Specify log locations for current site
+        #proxy_pass http://example-takase-tprefix;
+        access_log /var/www/log/example-takase_access.log;
+        error_log /var/www/log/example-takase_error.log warn;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        #fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/app/example-takase/tprefix/index.php;
+        fastcgi_param YII_DEBUG true;
+  }
+}
